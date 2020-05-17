@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicial</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        Olá {{ user.username }} seja bem vindo.
+        <a href="{% url 'logout' %}"> Sair </a>
+    {% endif %}
+    <h1>Sistema de Chamados da FC Solutions</h1>
+    {% for chamado in chamados %}
+        <p><a href='/detalhes/{{ chamado.id }}'>codigo: C{{ chamado.id }} - {{chamado.descricao }} - {{chamado.data_abertura}} - {{chamado.status.nome}} </a></p>
+    {% endfor %}
+</body>
+</html>
