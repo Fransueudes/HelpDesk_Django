@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.forms import ModelChoiceField
 
 
 class Status(models.Model):
@@ -14,6 +15,8 @@ class Categoria(models.Model):
 
     def __str__(self):
         return self.nome
+
+
 
 
 class Funcionario(models.Model):

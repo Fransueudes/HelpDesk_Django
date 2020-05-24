@@ -6,14 +6,14 @@
     <title>Detalhes Chamado</title>
 </head>
 <body>
-    <h1> C{{ chamado.id }} </h1>
-    <p> {{chamado.titulo}} </p>
-    <p> {{chamado.descricao}} </p>
-    <p> {{chamado.telefone}} </p>
-    <p> {{chamado.data_abertura}} </p>
-    <p> {{chamado.autor.nome}} </p>
-    <p> {{chamado.status.nome}} </p>
-    <p> {{chamado.categoria.nome}} </p>
+    <h1>Chamado:  C{{ chamado.id }} </h1>
+    <p> Titulo: {{chamado.titulo}} </p>
+    <p> Descrição: {{chamado.descricao}} </p>
+    <p> Telefone: {{chamado.telefone}} </p>
+    <p> Data de Abertura: {{chamado.data_abertura}} </p>
+    <p> Funcionario: {{chamado.autor.nome}} </p>
+    <p> Status: {{chamado.status.nome}} </p>
+    <p> Categoria: {{chamado.categoria.nome}} </p>
   
 </body>
 </html>

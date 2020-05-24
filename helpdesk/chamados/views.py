@@ -1,11 +1,12 @@
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from django.urls import reverse
-from .models import Chamado, Categoria
-from .forms import ChamadoForm
+from .models import *
+from .forms import ChamadoForm, AtendimentoForm
 
 from django.views.generic.edit import FormView
 from django.views.generic import TemplateView
+from django import forms
 
 def inicial(request):
     chamados = []
@@ -28,17 +29,40 @@ def detalhes(request, id_chamado):
         return render(request, 'chamados/erro_autenticacao.html', {})
 
 class ChamadoView(FormView):
-    template_name = "chamados/solicita.html"
-    form_class = ChamadoForm
+        template_name = "chamados/solicita.html"
+        form_class = ChamadoForm
+        def form_valid(self, form):
+            dados = form.clean()
+            chamado = Chamado(autor=Funcionario.objects.get(usuario=self.request.user),titulo=dados['titulo'],
+                             descricao=dados['descricao'], telefone=dados['telefone'], categoria=dados['categoria'],
+                             status=Status.objects.get(pk=1))
+            chamado.save()
+            return super().form_valid(form)
+
+        def get_success_url(self):
+            return reverse('chamado_sucesso') 
+
+class ChamadoSucessoView(TemplateView):
+    template_name = "chamados/chamado_sucesso.html"
+
+
+
+class AtendimentoView(FormView):
+    template_name = "chamados/atendimento.html"
+    form_class = AtendimentoForm
 
     def form_valid(self, form):
         dados = form.clean()
-        chamado = Chamado(titulo=dados['titulo'], descricao=dados['descricao'], telefone=dados['telefone'], categoria=dados['categoria'])
-        chamado.save()
+        novo_atendimento = Atendimento(atendente=Funcionario.objects.get(usuario=self.request.user), 
+                                       chamado=dados['chamado'], descricao=dados['descricao'])
+        teste= Chamado.objects.get(pk=dados["chamado"].pk)
+        teste.status=dados["status"]
+        novo_atendimento.save()
+        teste.save()
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('chamado_sucesso')
+        return reverse('atendimento_sucesso')
 
-class ChamadoSucessoView(TemplateView):
-    template_name = "chamado/chamado_sucesso.html"
+class AtendimentoSucessoView(TemplateView):
+    template_name = "chamados/atendimento_sucesso.html"

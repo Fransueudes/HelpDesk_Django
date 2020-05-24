@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chamado</title>
+    <title>Atendimento</title>
 </head>
 <body>
-    <h1><center>Chamado</center></h1>
+    <h1><center>Atendimento</center></h1>
     <form method="post">
-        {% csrf_token %} 
-        <center> {{ form.as_p }} </center>
-       <center><button type="submit">Abrir chamado</button></center>
+        {% csrf_token %}
+        <center>{{ form.as_p }}</center>
+       <center><button type="submit">Concluir</button></center>
     </form>
 </body>
 </html>

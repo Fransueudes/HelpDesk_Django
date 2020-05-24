@@ -10,7 +10,7 @@ class CategoriaAdmin(admin.ModelAdmin):
     pass
 @admin.register(Chamado)
 class ChamadoAdmin(admin.ModelAdmin):
-    pass
+	readonly_field = ('date',)
 @admin.register(Atendimento)
 class AtendimentoAdmin(admin.ModelAdmin):
     pass

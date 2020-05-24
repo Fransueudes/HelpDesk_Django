@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from chamados.views import ChamadoView, ChamadoSucessoView
+from chamados.views import ChamadoView, ChamadoSucessoView, AtendimentoView, AtendimentoSucessoView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,4 +23,6 @@ urlpatterns = [
     path('', include('chamados.urls')),
     path('chamado/', ChamadoView.as_view(), name='chamado'), 
     path('chamado/sucesso', ChamadoSucessoView.as_view(), name='chamado_sucesso'),
+    path('atendimento/', AtendimentoView.as_view(), name='atendimento'), 
+    path('atendimento/sucesso', AtendimentoSucessoView.as_view(), name='atendimento_sucesso'),
 ]
